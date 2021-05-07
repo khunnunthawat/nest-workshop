@@ -4,4 +4,6 @@
   npm i class-transformer
   https://www.npmjs.com/package/class-validator#validation-errors
   npm i class-validator
+  https://www.npmjs.com/package/change-case
+  npm i change-case
 ###

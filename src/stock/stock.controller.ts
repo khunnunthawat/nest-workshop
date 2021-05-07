@@ -10,6 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateStockDto } from './dto/create-stock-dto';
+import { ChangeStringCasePipe } from '../pipes/change-string-case.pipe';
 
 // นิยามว่าหน้านี้จะทำการรับผิดชอบใน path http://localhost:3000/stock
 @Controller('stock')
@@ -17,6 +18,14 @@ import { CreateStockDto } from './dto/create-stock-dto';
 export class StockController {
   @Get()
   getStock() {
+    // throw new NotFoundException();
+    // throw new HttpException(
+    //   {
+    //     status: HttpStatus.FORBIDDEN,
+    //     error: 'This is a custom message',
+    //   },
+    //   HttpStatus.FORBIDDEN,
+    // );
     return [1, 2, 3];
   }
   // @Post()
@@ -24,6 +33,7 @@ export class StockController {
   //   console.log(`name: ${name}, price: ${price}`);
   // }
   @UsePipes(ValidationPipe) // ใช้ในการตรวจสอบว่าข้อมูลที่เข้ามาครบมั้ย ValidationPipe
+  @UsePipes(new ChangeStringCasePipe())
   @Post()
   addStock(@Body() createStockDto: CreateStockDto) {
     const { name, price, stock } = createStockDto;
