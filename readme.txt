@@ -30,3 +30,36 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   synchronize: true,
 }
 ###
+
+###
+  FileUpload
+  https://docs.nestjs.com/techniques/file-upload#file-upload
+  @UseInterceptors(FileInterceptor('file'))
+  npm i multer
+  npm i fs-extra
+  npm i path
+###
+
+// Upload Image
+uploadImage = async (files, doc) => {
+  if (files.image != null) {
+    var fileExtention = files.image.name.split(".")[1];
+    doc.image = `${doc.id}.${fileExtention}`; // ถอดนามสกุลมา ต่อกับ id อีกที
+    var newpath =
+      path.resolve(__dirname + "/uploaded/images/") + "/" + doc.image;
+    // console.log(newpath);
+    if (fs.exists(newpath)) {
+      // ถ้ามีอยู่แล้วต้องทำการลบรูปเก่าก่อนที่จะเพิ่มเข้าไปใหม่
+      await fs.remove(newpath);
+    }
+    await fs.moveSync(files.image.path, newpath); // files.image.path ที่ตั้งต้นของ path แล้วทำการ newpath ไปยัง path ใหม่่นั้นเอง
+    // moveSync คำสั่งย้ายรูปไปยัง path ใหม่ path.resolve(__dirname + "/uploaded/images/") + "/" + doc.image;
+
+    // Update database
+    let result = product.update(
+      { image: doc.image },
+      { where: { id: doc.id } }
+    ); // ต้องมีเงื่อนไขโดยใช้ where id
+    return result;
+  }
+};

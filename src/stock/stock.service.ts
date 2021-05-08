@@ -12,8 +12,8 @@ export class StockService {
   createProduct(createStockDto: CreateStockDto) {
     return this.productRepository.createProduct(createStockDto);
   }
-  async getProduct() {
-    return await this.productRepository.find();
-    // ให้ทำการรอก่อน await แล้วค่อยส่งกลับไป
+  getProduct() {
+    return this.productRepository.find();
+    // ถ้ามีการรอให้้ใช้ await แล้วค่อยส่งกลับไป
   }
 }
