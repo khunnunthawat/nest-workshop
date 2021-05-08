@@ -117,8 +117,9 @@ export class StockController {
     @Param('id') id: number,
     @Body() createStockDto: CreateStockDto,
   ) {
-    const { name, price, stock } = createStockDto;
-    console.log(`${name}, ${price}, ${stock}`);
-    return `Update id is ${id}, ${name}, ${price}, ${stock}`;
+    // const { name, price, stock } = createStockDto;
+    // console.log(`${name}, ${price}, ${stock}`);
+    return this.stockService.updateProduct(id, createStockDto);
+    // return `Update id is ${id}, ${name}, ${price}, ${stock}`;
   }
 }

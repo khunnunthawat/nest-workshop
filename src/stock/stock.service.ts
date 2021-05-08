@@ -32,4 +32,13 @@ export class StockService {
     await fsExtra.remove(`upload/${image}`); // ลบรูปก่อนแล้วค่อยไปต่อที่ลบ id
     return await this.productRepository.delete(id);
   }
+  async updateProduct(id: number, createStockDto: CreateStockDto) {
+    const product = await this.getProductById(id);
+    const { name, price, stock } = createStockDto;
+    product.name = name;
+    product.price = price;
+    product.stock = stock;
+    await product.save(); // เป็นคำสั่ง insert คล้ายกับใน sql
+    return product;
+  }
 }
