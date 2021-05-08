@@ -11,9 +11,11 @@ import {
 export class UserRepository extends Repository<User> {
   async createUser(userCredentialDto: UserCredentialDto) {
     const { username, password } = userCredentialDto;
+
     const user = new User();
     user.username = username;
     user.password = password;
+
     try {
       await user.save();
     } catch (error) {
@@ -26,6 +28,7 @@ export class UserRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
+
     return user;
   }
 

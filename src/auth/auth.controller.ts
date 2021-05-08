@@ -14,13 +14,13 @@ export class AuthController {
 
   @Post('/singup')
   @UsePipes(ValidationPipe)
-  signUp(@Body() userCredential: UserCredentialDto) {
-    console.log('singUp', userCredential);
-    return this.authenService.signUp(userCredential);
+  signUp(@Body() userCredentialDto: UserCredentialDto) {
+    console.log('singUp', userCredentialDto);
+    return this.authenService.signUp(userCredentialDto);
   }
 
   @Post('/singin')
-  signIn(@Body() userCredential: UserCredentialDto) {
-    console.log('singIn', userCredential);
+  signIn(@Body() userCredentialDto: UserCredentialDto) {
+    console.log('singIn', userCredentialDto);
   }
 }
