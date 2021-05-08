@@ -113,13 +113,43 @@ export class StockController {
   }
 
   @Put('/:id')
-  UpdateStockById(
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './upload',
+        filename: (req, file, cb) => {
+          const randomName = Array(32)
+            .fill(null)
+            .map(() => Math.round(Math.random() * 16).toString(16))
+            .join('');
+          return cb(null, `${randomName}${extname(file.originalname)}`);
+        },
+      }),
+    }),
+  )
+  async UpdateStockById(
+    @UploadedFile() file,
     @Param('id') id: number,
     @Body() createStockDto: CreateStockDto,
   ) {
-    // const { name, price, stock } = createStockDto;
-    // console.log(`${name}, ${price}, ${stock}`);
-    return this.stockService.updateProduct(id, createStockDto);
-    // return `Update id is ${id}, ${name}, ${price}, ${stock}`;
+    const product = await this.stockService.updateProduct(id, createStockDto);
+    if (file) {
+      fsExtra.remove(`upload/${product.image}`);
+      const imageFile = id + extname(file.filename);
+      fsExtra.move(file.path, `upload/${imageFile}`); // ลบไฟล์เก่าแล้วทำการใส่ไฟล์ใหม่เข้าไป
+      product.image = imageFile; // แล้วมันจะทำการเอาชื่อไฟล์ใหม่ใส่เข้าไปใน product.image ก่อนแล้ว save
+      await product.save();
+    }
+    return product;
   }
+
+  // UpdateStockById(
+  //   @Param('id') id: number,
+  //   @Body() createStockDto: CreateStockDto,
+  // ) {
+  //   // const { name, price, stock } = createStockDto;
+  //   // console.log(`${name}, ${price}, ${stock}`);
+  //   return this.stockService.updateProduct(id, createStockDto);
+  //   // return `Update id is ${id}, ${name}, ${price}, ${stock}`;
+  // }
 }
