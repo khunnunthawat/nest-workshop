@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { UserCredentialDto } from './dto/user-credential.ato';
-// import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import {
   ConflictException,
   InternalServerErrorException,
@@ -11,10 +11,12 @@ import {
 export class UserRepository extends Repository<User> {
   async createUser(userCredentialDto: UserCredentialDto) {
     const { username, password } = userCredentialDto;
+    const salt = bcrypt.genSaltSync(); // ทำการซ้อน password
 
     const user = new User();
     user.username = username;
-    user.password = password;
+    user.salt = salt;
+    user.password = await this.hashPassword(password, salt); // ทำการไปเรียกใช้ function ข้างล่าง
 
     try {
       await user.save();
@@ -28,8 +30,11 @@ export class UserRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
-
     return user;
+  }
+
+  async hashPassword(password: string, salt: string) {
+    return bcrypt.hash(password, salt);
   }
 
   // async createUser(createUserCredentialDto: UserCredentialDto): Promise<User> {
