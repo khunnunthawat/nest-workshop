@@ -13,8 +13,15 @@ export class StockService {
   createProduct(createStockDto: CreateStockDto) {
     return this.productRepository.createProduct(createStockDto);
   }
-  getProduct() {
-    return this.productRepository.find();
+  getProduct(keyword: string) {
+    if (keyword) {
+      const qurey = this.productRepository.createQueryBuilder('product'); // ทำการเรียกใช้ methoad createQueryBuilder แล้วตามด้วยชื่อ Table ใน database
+      qurey.andWhere('product.name LIKE :keyword', { keyword: `%${keyword}%` }); // filter หา keyword โดยการใช้ qurey.andWhere ในการหาคำ
+      return qurey.getMany(); // .getMany() เป็นการเรียกใช้ข้อมูลที่ป้อนก่อนหน้านี้
+    } else {
+      return this.productRepository.find();
+    }
+    // return this.productRepository.find();
     // ถ้ามีการรอให้้ใช้ await แล้วค่อยส่งกลับไป
   }
   async getProductById(id: number) {

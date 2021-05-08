@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UploadedFile,
   UseInterceptors,
   UsePipes,
@@ -35,7 +36,7 @@ export class StockController {
   // ทำการเรียก stock.service.ts มาใช้
 
   @Get()
-  getStock() {
+  getStock(@Query('keyword') keyword: string) {
     // throw new NotFoundException();
     // throw new HttpException(
     //   {
@@ -44,7 +45,7 @@ export class StockController {
     //   },
     //   HttpStatus.FORBIDDEN,
     // );
-    return this.stockService.getProduct();
+    return this.stockService.getProduct(keyword);
     // return this.productRepository.find();
     //คำสั่ง find จะ return ค่าออกมาเป็น Array
     // ถ้าเป็น findOne จะ return ตัวเดียว
