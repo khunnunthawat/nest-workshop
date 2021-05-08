@@ -16,4 +16,7 @@ export class StockService {
     return this.productRepository.find();
     // ถ้ามีการรอให้้ใช้ await แล้วค่อยส่งกลับไป
   }
+  async getProductVyId(id: string) {
+    const found = await this.productRepository.findOne(id);
+  }
 }
