@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-// import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 // map ข้อมูลกับตัว DB
 // repo แทน database แทนผังของข้อมูล
@@ -27,4 +27,10 @@ export class User extends BaseEntity {
 
   @Column()
   salt: string;
+
+  // ตัวเช็ค password ของ user
+  async verifyPassword(password) {
+    const hashPassword = await bcrypt.hash(password, this.salt);
+    return this.password === hashPassword;
+  }
 }

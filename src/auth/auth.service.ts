@@ -19,4 +19,8 @@ export class AuthService {
     // await user.save();
     // return user;
   }
+
+  signIn(userCredentialDto: UserCredentialDto) {
+    return this.userRepository.verifyUserPassword(userCredentialDto);
+  }
 }

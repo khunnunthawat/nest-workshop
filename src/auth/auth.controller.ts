@@ -22,5 +22,6 @@ export class AuthController {
   @Post('/singin')
   signIn(@Body() userCredentialDto: UserCredentialDto) {
     console.log('singIn', userCredentialDto);
+    return this.authenService.signIn(userCredentialDto);
   }
 }

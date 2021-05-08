@@ -33,6 +33,17 @@ export class UserRepository extends Repository<User> {
     return user;
   }
 
+  async verifyUserPassword(userCredentialDto: UserCredentialDto) {
+    const { username, password } = userCredentialDto;
+    const user = await this.findOne({ username }); // ชื่อ key กับ value เหมือนกันก็ได้เลยใช้แบบนี้ เมื่อก่อนใช้ username: username
+    // ทำการสร้าง function verifyPassword ใน entity
+    if (user && (await user.verifyPassword(password))) {
+      return user.username;
+    } else {
+      return 'invalid';
+    }
+  }
+
   async hashPassword(password: string, salt: string) {
     return bcrypt.hash(password, salt);
   }
