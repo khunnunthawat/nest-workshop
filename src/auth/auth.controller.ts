@@ -1,4 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserCredentialDto } from './dto/user-credential.ato';
 
@@ -7,12 +13,14 @@ export class AuthController {
   constructor(private authenService: AuthService) {}
 
   @Post('/singup')
-  signUp(@Body() userCredentialDto: UserCredentialDto) {
-    console.log('singUp', userCredentialDto);
+  @UsePipes(ValidationPipe)
+  signUp(@Body() userCredential: UserCredentialDto) {
+    console.log('singUp', userCredential);
+    return this.authenService.signUp(userCredential);
   }
 
   @Post('/singin')
-  signIn(@Body() userCredentialDto: UserCredentialDto) {
-    console.log('singIn', userCredentialDto);
+  signIn(@Body() userCredential: UserCredentialDto) {
+    console.log('singIn', userCredential);
   }
 }

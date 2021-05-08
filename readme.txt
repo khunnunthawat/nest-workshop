@@ -43,3 +43,21 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   npm i path
   UpDate : https://github.com/typeorm/typeorm/blob/master/docs/entities.md#column-types-for-postgres
 ###
+
+###
+  Authentication
+  https://stackoverflow.com/questions/60451337/password-confirmation-in-typescript-with-class-validator
+  // Maybe validator here
+  export class SignUpDto {
+      @IsString()
+      @MinLength(4)
+      @MaxLength(20)
+      username: string;
+
+      @IsString()
+      @MinLength(4)
+      @MaxLength(20)
+      @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {message: 'password too weak'})
+      password: string;
+  }
+###
