@@ -13,6 +13,7 @@
   npm install pg --save
   npm i @nestjs/typeorm
   npm install rxjs @nestjs/typeorm pg
+  nest g service stock --no-spec
 ###
 
 ###

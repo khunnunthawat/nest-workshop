@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { StockController } from './stock.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductRepository } from './product.repository';
+import { StockService } from './stock.service';
 
 // Meta Data
 // Module นี้ประกอบไปด้วยอะไรบ้างแล้วก็อ้างถึงตัว StockController
@@ -11,5 +12,6 @@ import { ProductRepository } from './product.repository';
   // ถ้ามีหลาย table ก็ต้องสร้างหลาย Repository
   imports: [TypeOrmModule.forFeature([ProductRepository])],
   controllers: [StockController],
+  providers: [StockService],
 })
 export class StockModule {}
