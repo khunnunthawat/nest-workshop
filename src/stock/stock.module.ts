@@ -6,7 +6,10 @@ import { ProductRepository } from './product.repository';
 // Meta Data
 // Module นี้ประกอบไปด้วยอะไรบ้างแล้วก็อ้างถึงตัว StockController
 @Module({
-  imports: [TypeOrmModule.forFeature([ProductRepository])], //เป็นการ import table
+  // ใน Module เราจะใช้ table กี่ตัว ก็แทนด้วยตัว ProductRepository ของนั้นๆไป
+  // เป็นการ import table
+  // ถ้ามีหลาย table ก็ต้องสร้างหลาย Repository
+  imports: [TypeOrmModule.forFeature([ProductRepository])],
   controllers: [StockController],
 })
 export class StockModule {}

@@ -1,14 +1,14 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 // map ข้อมูลกับตัว DB
+// repo แทน database แทนผังของข้อมูล
 // 1 table แทนด้วย 1 repo 1 entity
-// entity กำหนดว่าจะมี column อะไรบ้าง
-@Entity()
+@Entity() // ไว้แสดงว่ามี column อะไรบ้าง
 export class Product extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn() // เหมือน ai ใน sql
   id: number;
 
-  @Column()
+  @Column() // ทำการสร้างใน table
   name: string;
 
   @Column()

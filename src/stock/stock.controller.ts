@@ -47,20 +47,24 @@ export class StockController {
   addStock(@Body() createStockDto: CreateStockDto) {
     const { name, price, stock } = createStockDto;
     console.log(`name: ${name}, price: ${price}, stock: ${stock}`);
+
     const product = new Product();
     product.name = name;
     product.price = price;
     product.stock = stock;
     product.save(); // เป็นคำสั่ง insert คล้ายกับใน sql
   }
+
   @Get('/:id')
   getStockById(@Param('id') id: number) {
     return `Get id is ${id}`;
   }
+
   @Delete('/:id')
   deleteStockById(@Param('id') id: number) {
     return `Delete id is ${id}`;
   }
+
   @Put('/:id')
   UpdateStockById(
     @Param('id') id: number,
