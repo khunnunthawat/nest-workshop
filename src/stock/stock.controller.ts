@@ -104,12 +104,12 @@ export class StockController {
 
   @Get('/:id')
   getStockById(@Param('id') id: number) {
-    return `Get id is ${id}`;
+    return this.stockService.getProductById(id);
   }
 
   @Delete('/:id')
   deleteStockById(@Param('id') id: number) {
-    return `Delete id is ${id}`;
+    return this.stockService.deleteProduct(id);
   }
 
   @Put('/:id')
