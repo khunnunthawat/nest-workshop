@@ -91,10 +91,13 @@ export class StockController {
   @UsePipes(new ChangeStringCasePipe())
   async addStock(@UploadedFile() file, @Body() createStockDto: CreateStockDto) {
     // console.log(file);
-    const product = await this.stockService.createProduct(createStockDto);
     // ต้องให้มันหยุดรอจนเสร็จแล้ววิ่งไปทำข้างล่างต่อ จึงต้องใช้ await
-    const fileExtension = extname(file.filename);
-    fsExtra.move(file.path, `upload/${product.id}` + fileExtension);
+    const product = await this.stockService.createProduct(createStockDto);
+    // const fileExtension = extname(file.filename);
+    const imageFile = product.id + extname(file.filename);
+    fsExtra.move(file.path, `upload/${imageFile}`);
+    product.image = imageFile;
+    await product.save();
     // product.id ได้มาจากการสร้างชุดใหม่ขึ้นมา
     return product;
   }

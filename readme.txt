@@ -38,6 +38,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   npm i multer
   npm i fs-extra
   npm i path
+  UpDate : https://github.com/typeorm/typeorm/blob/master/docs/entities.md#column-types-for-postgres
 ###
 
 // Upload Image

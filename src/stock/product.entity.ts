@@ -1,4 +1,10 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 // map ข้อมูลกับตัว DB
 // repo แทน database แทนผังของข้อมูล
@@ -19,4 +25,10 @@ export class Product extends BaseEntity {
 
   @Column()
   stock: number;
+
+  @Column({ default: 'noImage.jpeg' })
+  image: string;
+
+  @UpdateDateColumn()
+  updated: Date;
 }
