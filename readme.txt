@@ -14,6 +14,9 @@
   npm i @nestjs/typeorm
   npm install rxjs @nestjs/typeorm pg
   nest g service stock --no-spec
+  nest g module auth --no-spec
+  nest g co auth --no-spec
+  nest g s auth --no-spec
 ###
 
 ###
