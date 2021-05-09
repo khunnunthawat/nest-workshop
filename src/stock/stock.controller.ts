@@ -25,11 +25,13 @@ import * as fsExtra from 'fs-extra';
 import { extname } from 'path';
 import { LoggerInterceptor } from 'src/logger.interceptor';
 import { MyGuard } from 'src/my.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 // นิยามว่าหน้านี้จะทำการรับผิดชอบใน path http://localhost:3000/stock
 @Controller('stock')
 @UseInterceptors(LoggerInterceptor)
-@UseGuards(MyGuard)
+// @UseGuards(MyGuard)
+@UseGuards(AuthGuard()) // การเข้าถึงส่วนต่างๆต้องผ่าน token ในการใช้ Authorization 
 // http Method
 export class StockController {
   // constructor(

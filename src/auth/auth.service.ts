@@ -31,8 +31,11 @@ export class AuthService {
     if (!username) {
       throw new UnauthorizedException('Invalid username or password');
     }
-    const payload = { username };
-    const token = await this.jwtService.sign(payload);
+    // payload ให้ใช้ข้อมูลเท่าที่จำเป็นจริงๆไม่งั้น server อาจจะทำงานหนักได้
+    const payload = { username }; // เป็นการสร้าง token และไม่ควรใส่ข้อมูลที่เป็นความลับเข้าไปด้วย
+    const token = await this.jwtService.sign(payload); // token ดูได้แต่ไม่สามารถเปลี่ยนแปลงข้อมูลได้
     return { token }; // มันจะทำการส่ง token แทนที่จะส่ง username นั้นเอง
   }
 }
+
+// https://jwt.io/  เช็ค token
