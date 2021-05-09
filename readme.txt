@@ -1,7 +1,77 @@
 ###
+  https://www.npmjs.com/~nestjscore
   nest g module stock --no-spec
   nest g controller stock --no-spec
   npm i class-transformer
   https://www.npmjs.com/package/class-validator#validation-errors
   npm i class-validator
+  https://www.npmjs.com/package/change-case
+  npm i change-case
+  https://www.npmjs.com/package/pg
+  https://www.npmjs.com/package/typeorm
+  npm install typeorm --save
+  npm install pg --save
+  npm i @nestjs/typeorm
+  npm install rxjs @nestjs/typeorm pg
+  nest g service stock --no-spec
+  nest g module auth --no-spec
+  nest g co auth --no-spec
+  nest g s auth --no-spec
+  nest g mi logger --no-spec
+  https://docs.nestjs.com/middleware
+  nest g in logger --no-spec
+  https://docs.nestjs.com/interceptors
+  nest g gu my --no-spec
+  https://docs.nestjs.com/guards
+###
+
+###
+// Setup TypeOrm configuration
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+export const typeOrmConfig: TypeOrmModuleOptions = {
+  type: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: 'ifal',
+  database: 'workshop',
+  entities: [__dirname + '/../**/*.entities.{js,ts}'],
+  synchronize: true,
+}
+###
+
+###
+  FileUpload
+  https://docs.nestjs.com/techniques/file-upload#file-upload
+  @UseInterceptors(FileInterceptor('file'))
+  npm i multer
+  npm i fs-extra
+  npm i path
+  UpDate : https://github.com/typeorm/typeorm/blob/master/docs/entities.md#column-types-for-postgres
+###
+
+###
+  Authentication
+  https://stackoverflow.com/questions/60451337/password-confirmation-in-typescript-with-class-validator
+  // Maybe validator here
+  export class SignUpDto {
+      @IsString()
+      @MinLength(4)
+      @MaxLength(20)
+      username: string;
+
+      @IsString()
+      @MinLength(4)
+      @MaxLength(20)
+      @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {message: 'password too weak'})
+      password: string;
+  }
+###
+
+###
+  JWT = JSON WEB TOKEN
+  เป็นการสร้าง token ที่ผ่านกระบวนการ singin หรือ login
+  passportjs : http://www.passportjs.org/packages/
+  https://www.codota.com/code/javascript/functions/passport-jwt/fromAuthHeaderAsBearerToken
+  npm i @nestjs/jwt @nestjs/passport passport passport-jwt
 ###
