@@ -67,3 +67,10 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
       password: string;
   }
 ###
+
+###
+  JWT = JSON WEB TOKEN
+  เป็นการสร้าง token ที่ผ่านกระบวนการ singin หรือ login
+  passportjs : http://www.passportjs.org/packages/
+  npm i @nestjs/jwt @nestjs/passport passport passport-jwt
+###
