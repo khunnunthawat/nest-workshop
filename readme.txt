@@ -21,6 +21,8 @@
   https://docs.nestjs.com/middleware
   nest g in logger --no-spec
   https://docs.nestjs.com/interceptors
+  nest g gu my --no-spec
+  https://docs.nestjs.com/guards
 ###
 
 ###

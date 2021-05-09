@@ -9,6 +9,7 @@ import {
   Put,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
   UsePipes,
   ValidationPipe,
@@ -23,10 +24,12 @@ import { diskStorage } from 'multer';
 import * as fsExtra from 'fs-extra';
 import { extname } from 'path';
 import { LoggerInterceptor } from 'src/logger.interceptor';
+import { MyGuard } from 'src/my.guard';
 
 // นิยามว่าหน้านี้จะทำการรับผิดชอบใน path http://localhost:3000/stock
 @Controller('stock')
 @UseInterceptors(LoggerInterceptor)
+@UseGuards(MyGuard)
 // http Method
 export class StockController {
   // constructor(
