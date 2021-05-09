@@ -19,6 +19,8 @@
   nest g s auth --no-spec
   nest g mi logger --no-spec
   https://docs.nestjs.com/middleware
+  nest g in logger --no-spec
+  https://docs.nestjs.com/interceptors
 ###
 
 ###

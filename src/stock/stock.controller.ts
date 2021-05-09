@@ -8,7 +8,6 @@ import {
   Post,
   Put,
   Query,
-  Req,
   UploadedFile,
   UseInterceptors,
   UsePipes,
@@ -23,9 +22,11 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as fsExtra from 'fs-extra';
 import { extname } from 'path';
+import { LoggerInterceptor } from 'src/logger.interceptor';
 
 // นิยามว่าหน้านี้จะทำการรับผิดชอบใน path http://localhost:3000/stock
 @Controller('stock')
+@UseInterceptors(LoggerInterceptor)
 // http Method
 export class StockController {
   // constructor(
