@@ -22,7 +22,7 @@ export class UserRepository extends Repository<User> {
       await user.save();
     } catch (error) {
       console.log(error);
-      if (error.code === '23502') {
+      if (error.code === '23505') {
         throw new ConflictException(
           'Error, because this username already exist!',
         );
@@ -40,7 +40,7 @@ export class UserRepository extends Repository<User> {
     if (user && (await user.verifyPassword(password))) {
       return user.username;
     } else {
-      return 'invalid';
+      return null;
     }
   }
 
