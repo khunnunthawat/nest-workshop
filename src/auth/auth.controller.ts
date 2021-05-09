@@ -1,10 +1,14 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
+  Req,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { UserCredentialDto } from './dto/user-credential.ato';
 
@@ -23,5 +27,15 @@ export class AuthController {
   signIn(@Body() userCredentialDto: UserCredentialDto) {
     console.log('singIn', userCredentialDto);
     return this.authenService.signIn(userCredentialDto);
+  }
+
+  // เป็นการปกกัน user การเข้าถึง
+  @Get('/test')
+  @UseGuards(AuthGuard())
+  // ชื่อ route
+  // ถ้าเกิดมีการยิงเข้ามาที่ path นี้ จะทำการเช็คว่าข้อมูลเป็นอย่างไรที่จะ return มาจาก AuthJwtStrategy ของ user ในหน้า auth.jwt.strategy.ts
+  test(@Req() req) {
+    console.log(req);
+    return req.user.username;
   }
 }
