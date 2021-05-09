@@ -72,5 +72,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   JWT = JSON WEB TOKEN
   เป็นการสร้าง token ที่ผ่านกระบวนการ singin หรือ login
   passportjs : http://www.passportjs.org/packages/
+  https://www.codota.com/code/javascript/functions/passport-jwt/fromAuthHeaderAsBearerToken
   npm i @nestjs/jwt @nestjs/passport passport passport-jwt
 ###
