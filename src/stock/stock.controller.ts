@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  Req,
   UploadedFile,
   UseInterceptors,
   UsePipes,
@@ -45,6 +46,8 @@ export class StockController {
     //   },
     //   HttpStatus.FORBIDDEN,
     // );
+    // @Req() req เรียกใช้ในการเช็ค Middleware
+    // console.log('Added by Middleware : ' + req.timestamp);
     return this.stockService.getProduct(keyword);
     // return this.productRepository.find();
     //คำสั่ง find จะ return ค่าออกมาเป็น Array

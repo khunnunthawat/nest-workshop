@@ -17,6 +17,8 @@
   nest g module auth --no-spec
   nest g co auth --no-spec
   nest g s auth --no-spec
+  nest g mi logger --no-spec
+  https://docs.nestjs.com/middleware
 ###
 
 ###
